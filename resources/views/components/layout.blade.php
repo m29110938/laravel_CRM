@@ -1,5 +1,6 @@
 <!doctype html>
 
+@vite(['resources/sass/app.scss', 'resources/js/app.js'])
 <title>Laravel From Scratch Blog</title>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -15,14 +16,28 @@
 
 <body style="font-family: Open Sans, sans-serif">
     <section class="px-6 py-8">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- 側邊欄 -->
+                <div class="col-md-3">
+                    <section class="px-6 py-8">
+                        @include('projects._sidebar')
+                    </section>
+                </div>
+                <!-- 主要內容 -->
+                <div class="col-md-9">
 
-        {{ $slot }}
+                    {{ $slot }}
+
+                </div>
+            </div>
+        </div>
+
+
+
+        @include('projects._footer')
 
 
     </section>
-
-    {{-- @include('posts._footer') --}}
-
-
-    {{-- <x-flash /> --}}
+    <x-flash />
 </body>

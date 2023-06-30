@@ -18,4 +18,21 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [ProjectController::class, 'index']);
+
+// login
+
+
+// CRM
+Route::get('/', function () {
+    return view('index');
+});
+
+// project
+Route::get('/project', [ProjectController::class, 'index']);
+Route::get('project/create', [ProjectController::class, 'create']);
+Route::post('project/create', [ProjectController::class, 'store']);
+Route::get('project/{project:id}/edit', [ProjectController::class, 'edit']);
+Route::patch('project/{project:id}', [ProjectController::class, 'update']);
+Route::delete('project/{project:id}', [ProjectController::class, 'delete']);
+
+// member

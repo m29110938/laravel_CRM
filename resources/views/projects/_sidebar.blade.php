@@ -1,12 +1,14 @@
 <div class="sidebar">
-    <!-- 侧边栏内容 -->
+    <!-- 側邊欄內容 -->
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link active" href="#">連結1</a>
+            <a class="nav-link active" href="/">CRM</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">連結2</a>
+            <a class="nav-link active" href="/project">專案</a>
         </li>
-        <!-- 其他侧边栏菜单项 -->
+        <li class="nav-item">
+            <a class="nav-link" href="/member">會員管理</a>
+        </li>
     </ul>
 </div>
