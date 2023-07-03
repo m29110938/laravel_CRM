@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +18,20 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-
 // login
-
+// 登入（登入介面、登入功能）
+Route::get('/', function () {
+    return view('auth.login');
+});
+// 註冊（註冊介面、註冊功能）
+Route::get('/register', function () {
+    return view('auth.register');
+});
 
 // CRM
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 // project
 Route::get('/project', [ProjectController::class, 'index']);
@@ -36,3 +42,17 @@ Route::patch('project/{project:id}', [ProjectController::class, 'update']);
 Route::delete('project/{project:id}', [ProjectController::class, 'delete']);
 
 // member
+
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
