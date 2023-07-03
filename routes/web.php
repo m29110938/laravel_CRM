@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,14 +20,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // login
-// 登入（登入介面、登入功能）
-Route::get('/', function () {
-    return view('auth.login');
-});
-// 註冊（註冊介面、註冊功能）
-Route::get('/register', function () {
-    return view('auth.register');
-});
+require __DIR__ . '/auth.php';
 
 // CRM
 // Route::get('/', function () {
@@ -34,12 +28,14 @@ Route::get('/register', function () {
 // });
 
 // project
-Route::get('/project', [ProjectController::class, 'index']);
-Route::get('project/create', [ProjectController::class, 'create']);
-Route::post('project/create', [ProjectController::class, 'store']);
-Route::get('project/{project:id}/edit', [ProjectController::class, 'edit']);
-Route::patch('project/{project:id}', [ProjectController::class, 'update']);
-Route::delete('project/{project:id}', [ProjectController::class, 'delete']);
+Route::middleware('auth')->group(function () {
+    Route::get('/project', [ProjectController::class, 'index']);
+    Route::get('project/create', [ProjectController::class, 'create']);
+    Route::post('project/create', [ProjectController::class, 'store']);
+    Route::get('project/{project:id}/edit', [ProjectController::class, 'edit']);
+    Route::patch('project/{project:id}', [ProjectController::class, 'update']);
+    Route::delete('project/{project:id}', [ProjectController::class, 'delete']);
+});
 
 // member
 
@@ -54,5 +50,3 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-require __DIR__ . '/auth.php';
